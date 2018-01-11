@@ -2,6 +2,7 @@ package me.daniel;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 import me.daniel.screens.SplashScreen;
 
@@ -24,6 +25,10 @@ public class MyGame extends Game {
 
 	public Texture getTexture(String path) {
 		return assets.getManager().get("graphics/"+path+".png", Texture.class);
+	}
+
+	public BitmapFont getFont(String path) {
+		return assets.getManager().get(path+".ttf", BitmapFont.class);
 	}
 
 	public boolean isPaused() {
