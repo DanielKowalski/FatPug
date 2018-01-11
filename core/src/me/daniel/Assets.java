@@ -17,16 +17,16 @@ public class Assets {
         while(!manager.update());
     }
 
+    public AssetManager getManager() {
+        return manager;
+    }
+
     private void loadAssets() {
         loadTexture("splash");
     }
 
     private void loadTexture(String path) {
-        manager.load("graphics/"+path+".png", Texture.class);
-    }
-
-    private AssetManager getManager() {
-        return manager;
+        manager.load("graphics/" + path + ".png", Texture.class);
     }
 
 }
