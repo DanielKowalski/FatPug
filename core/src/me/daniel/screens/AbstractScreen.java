@@ -1,6 +1,7 @@
 package me.daniel.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -39,7 +40,10 @@ public abstract class AbstractScreen implements Screen {
         clearScreen();
         camera.update();
 
-        if(!game.isPaused())stage.act();
+        if(!game.isPaused()) {
+            stage.act();
+            if(Gdx.input.isKeyJustPressed(Keys.ESCAPE))Gdx.app.exit();
+        }
         stage.draw();
     }
 
