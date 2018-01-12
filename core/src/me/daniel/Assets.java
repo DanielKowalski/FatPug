@@ -38,8 +38,8 @@ public class Assets {
         manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
         manager.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
 
-        loadFont("splash", 48, Color.BLUE, Color.WHITE);
-        loadFont("menuButton", 12, Color.WHITE, Color.GRAY);
+        loadFont("splash", 80, Color.BLUE, Color.WHITE);
+        loadFont("menuButton", 48, Color.WHITE, Color.BLACK);
     }
 
     private void loadTexture(String path) {

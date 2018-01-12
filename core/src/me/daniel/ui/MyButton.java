@@ -18,7 +18,7 @@ public class MyButton extends Group {
         Image img = new Image(MyGame.getTexture("buttons/"+name));
         img.setBounds(0, 0, width, height);
         addActor(img);
-        MyLabel label = new MyLabel(text, MyGame.getFont("menuButton"));
+        MyLabel label = new MyLabel(text, MyGame.getFont(name+"Button"));
         label.setPosition((width-label.getWidth())/2, (height-label.getHeight())/2);
         addActor(label);
 
