@@ -28,6 +28,11 @@ public class SplashScreen extends AbstractScreen {
     protected void init() {
         labels = new Array<MyLabel>();
         texts = new Group();
+
+        Image background = new Image(MyGame.getTexture("backgrounds/splash"));
+        background.setBounds(0, 0, MyGame.WIDTH, MyGame.HEIGHT);
+        stage.addActor(background);
+
         stage.addActor(texts);
         delay = 2;
 
@@ -56,7 +61,7 @@ public class SplashScreen extends AbstractScreen {
     }
 
     private void addSplashText(String text) {
-        MyLabel label = new MyLabel(text, game.getFont("splash"));
+        MyLabel label = new MyLabel(text, MyGame.getFont("splash"));
         label.setPosition((MyGame.WIDTH-label.getWidth())/2, (MyGame.HEIGHT-label.getHeight())/2);
         labels.add(label);
     }

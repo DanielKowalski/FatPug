@@ -1,5 +1,7 @@
 package me.daniel.screens;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+
 import me.daniel.MyGame;
 
 /**
@@ -14,7 +16,9 @@ public class MenuScreen extends AbstractScreen {
 
     @Override
     protected void init() {
-
+        Image background = new Image(MyGame.getTexture("backgrounds/menu"));
+        background.setBounds(0,0, MyGame.WIDTH, MyGame.HEIGHT);
+        stage.addActor(background);
     }
 
 }

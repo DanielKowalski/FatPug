@@ -11,10 +11,10 @@ public class MyGame extends Game {
 	public static int WIDTH = 1280, HEIGHT = 720;
 	public static String TITLE = "FAT PUG THE GAME";
 	private boolean paused, onMobile;
-	private Assets assets;
+	private static Assets assets;
 
 	public MyGame(boolean onMobile) {
-		this.onMobile = onMobile;
+		setOnMobile(onMobile);
 	}
 
 	@Override
@@ -23,11 +23,11 @@ public class MyGame extends Game {
 		setScreen(new SplashScreen(this));
 	}
 
-	public Texture getTexture(String path) {
+	public static Texture getTexture(String path) {
 		return assets.getManager().get("graphics/"+path+".png", Texture.class);
 	}
 
-	public BitmapFont getFont(String path) {
+	public static BitmapFont getFont(String path) {
 		return assets.getManager().get(path+".ttf", BitmapFont.class);
 	}
 

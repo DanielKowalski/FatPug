@@ -29,13 +29,17 @@ public class Assets {
     }
 
     private void loadAssets() {
-        loadTexture("splash");
+        final String BUT = "buttons/", BACK = "backgrounds/";
+        loadTexture(BUT+"menu");
+        loadTexture(BACK+"splash");
+        loadTexture(BACK+"menu");
 
         FileHandleResolver resolver = new InternalFileHandleResolver();
         manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
         manager.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
 
         loadFont("splash", 48, Color.BLUE, Color.WHITE);
+        loadFont("menuButton", 12, Color.WHITE, Color.GRAY);
     }
 
     private void loadTexture(String path) {
