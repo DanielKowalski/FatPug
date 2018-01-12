@@ -9,9 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class MyLabel extends Label {
 
-    public MyLabel(String text, BitmapFont font, float x, float y) {
+    public MyLabel(String text, BitmapFont font) {
         super(text, new Label.LabelStyle(font, null));
-        setPosition(x, y);
     }
 
 }

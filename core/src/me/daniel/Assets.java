@@ -35,7 +35,7 @@ public class Assets {
         manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
         manager.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
 
-        loadFont("menu", 12, Color.BLUE, Color.WHITE);
+        loadFont("splash", 48, Color.BLUE, Color.WHITE);
     }
 
     private void loadTexture(String path) {
@@ -53,9 +53,10 @@ public class Assets {
             fontFileName = "fonts/baloo.ttf";
             fontParameters.size = size;
             fontParameters.characters += "żźćńąśłęóŻŹĆŃĄŚŁĘÓ";
+            fontParameters.color = color;
             if(border != null) {
-                fontParameters.borderWidth = size/12;
-                fontParameters.borderColor = color;
+                fontParameters.borderWidth = size/24;
+                fontParameters.borderColor = border;
             }
         }
 

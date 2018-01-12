@@ -1,9 +1,13 @@
 package me.daniel.screens;
 
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 
 import me.daniel.MyGame;
+import me.daniel.ui.MyLabel;
 
 /**
  * Created by daniel on 11.01.2018.
@@ -11,23 +15,50 @@ import me.daniel.MyGame;
 
 public class SplashScreen extends AbstractScreen {
 
+    private Array<MyLabel> labels;
+    private int actualText;
+    private float delay;
+    private Group texts;
+
     public SplashScreen(MyGame game) {
         super(game);
     }
 
     @Override
     protected void init() {
-        Image splash = new Image(game.getTexture("splash"));
-        splash.setBounds(0, 0, MyGame.WIDTH, MyGame.HEIGHT);
-        stage.addActor(splash);
-        new Timer().scheduleTask(new Timer.Task() {
+        labels = new Array<MyLabel>();
+        texts = new Group();
+        stage.addActor(texts);
+        delay = 2;
+
+        addSplashText("Filip & Daniel przedstawiają:");
+        addSplashText("FAT PUG THE GAME");
+        addSplashText("Zapraszamy!");
+
+        stage.addAction(new Action() {
 
             @Override
-            public void run() {
-                game.setScreen(new MenuScreen(game));
+            public boolean act(float delta) {
+                delay+=delta;
+                if(delay >= 2) {
+                    if(actualText == labels.size)game.setScreen(new MenuScreen(game));
+                    else {
+                        texts.clear();
+                        texts.addActor(labels.get(actualText));
+                        actualText++;
+                        delay = 0;
+                    }
+                }
+                return false;
             }
 
-        }, 1.5f);
+        });
+    }
+
+    private void addSplashText(String text) {
+        MyLabel label = new MyLabel(text, game.getFont("splash"));
+        label.setPosition((MyGame.WIDTH-label.getWidth())/2, (MyGame.HEIGHT-label.getHeight())/2);
+        labels.add(label);
     }
 
 }
