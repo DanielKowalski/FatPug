@@ -19,6 +19,8 @@ public class MenuScreen extends AbstractScreen {
         Image background = new Image(MyGame.getTexture("backgrounds/menu"));
         background.setBounds(0,0, MyGame.WIDTH, MyGame.HEIGHT);
         stage.addActor(background);
+
+
     }
 
 }
