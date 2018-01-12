@@ -1,5 +1,6 @@
 package me.daniel.ui;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 /**
@@ -8,8 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class MyLabel extends Label {
 
-    public MyLabel(CharSequence text, LabelStyle style) {
-        super(text, style);
+    public MyLabel(String text, BitmapFont font) {
+        super(text, new Label.LabelStyle(font, null));
     }
 
 }

@@ -3,6 +3,7 @@ package me.daniel;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -34,7 +35,7 @@ public class Assets {
         manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
         manager.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
 
-        loadFont("menu", 12);
+        loadFont("menu", 12, Color.BLUE, Color.WHITE);
     }
 
     private void loadTexture(String path) {
@@ -42,16 +43,20 @@ public class Assets {
     }
 
 
-    private void loadFont(String name, int size) {
-        manager.load(name+".ttf", BitmapFont.class, new MyFont(size));
+    private void loadFont(String name, int size, Color color, Color border) {
+        manager.load(name+".ttf", BitmapFont.class, new MyFont(size, color, border));
     }
 
     private class MyFont extends FreetypeFontLoader.FreeTypeFontLoaderParameter {
 
-        public MyFont(int size) {
+        public MyFont(int size, Color color, Color border) {
             fontFileName = "fonts/baloo.ttf";
             fontParameters.size = size;
             fontParameters.characters += "żźćńąśłęóŻŹĆŃĄŚŁĘÓ";
+            if(border != null) {
+                fontParameters.borderWidth = size/12;
+                fontParameters.borderColor = color;
+            }
         }
 
     }
