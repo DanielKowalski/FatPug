@@ -10,18 +10,18 @@ public class MyGame extends Game {
 
 	public static int WIDTH = 1280, HEIGHT = 720;
 	public static String TITLE = "FAT PUG THE GAME";
-	private boolean paused;
+	private boolean paused, onMobile;
 	private Assets assets;
+
+	public MyGame(boolean onMobile) {
+		this.onMobile = onMobile;
+	}
 
 	@Override
 	public void create() {
 		assets = new Assets();
 		setScreen(new SplashScreen(this));
 	}
-
-	/*
-		Getters and setters
-	 */
 
 	public Texture getTexture(String path) {
 		return assets.getManager().get("graphics/"+path+".png", Texture.class);
@@ -31,6 +31,10 @@ public class MyGame extends Game {
 		return assets.getManager().get(path+".ttf", BitmapFont.class);
 	}
 
+	/*
+		Getters and setters
+	 */
+
 	public boolean isPaused() {
 		return paused;
 	}
@@ -39,4 +43,11 @@ public class MyGame extends Game {
 		this.paused = paused;
 	}
 
+	public boolean isOnMobile() {
+		return onMobile;
+	}
+
+	public void setOnMobile(boolean onMobile) {
+		this.onMobile = onMobile;
+	}
 }

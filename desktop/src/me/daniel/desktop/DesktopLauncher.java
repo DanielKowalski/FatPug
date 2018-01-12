@@ -14,7 +14,7 @@ public class DesktopLauncher {
 		config.resizable = false;
 		config.title = MyGame.TITLE;
 
-		new LwjglApplication(new MyGame(), config);
+		new LwjglApplication(new MyGame(false), config);
 	}
 
 }
