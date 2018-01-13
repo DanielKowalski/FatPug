@@ -42,11 +42,11 @@ public class MenuScreen extends AbstractScreen {
             }
 
         });
-        addButton("AUTHOR", new ClickCallback() {
+        addButton("AUTHORS", new ClickCallback() {
 
             @Override
             public void click() {
-
+                game.setScreen(new AuthorScreen(game));
             }
 
         });

@@ -33,6 +33,7 @@ public class Assets {
         loadTexture(BUT+"menu");
         loadTexture(BACK+"splash");
         loadTexture(BACK+"menu");
+        loadTexture(BACK+"authors");
 
         FileHandleResolver resolver = new InternalFileHandleResolver();
         manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
@@ -40,6 +41,7 @@ public class Assets {
 
         loadFont("splash", 80, Color.BLUE, Color.WHITE);
         loadFont("menuButton", 48, Color.WHITE, Color.BLACK);
+        loadFont("credits", 24, Color.SALMON, Color.GRAY);
     }
 
     private void loadTexture(String path) {
