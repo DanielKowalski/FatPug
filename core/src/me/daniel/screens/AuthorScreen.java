@@ -36,9 +36,15 @@ public class AuthorScreen extends AbstractScreen {
         credits.add("FILIP STRÓŻYK");
         credits.add("GRAPHICS:");
         credits.add("FILIP STRÓŻYK");
-        credits.add("FONT:");
+        credits.add("FONTS:");
         credits.add("BALOO");
         credits.add("Copyright (c) 2015 Ek Type (www.ektype.in)");
+        credits.add("AUTOUR ONE");
+        credits.add("Copyright (c) 2012, Sorkin Type Co (www.sorkintype.com),");
+        credits.add("with Reserved Font Name 'Autour'");
+        credits.add("AMATIC BOLD");
+        credits.add("Copyright (c) 2011 by vernon adams (vern@newtypography.co.uk),");
+        credits.add("with Reserved Font Names Amatic Bold");
         credits.add("SIL Open Font License");
         credits.add("SPECIAL THANKS!");
 

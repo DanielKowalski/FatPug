@@ -21,10 +21,10 @@ public class GameplayScreen extends AbstractScreen {
     protected void init() {
         initGroups();
         initBackground();
-        inigGround();
+        initGround();
     }
 
-    private void inigGround() {
+    private void initGround() {
         Image grass = new Image(MyGame.getTexture("objects/grass"));
         grass.setBounds(0, 0, MyGame.WIDTH, MyGame.HEIGHT/10);
         groundPlan.addActor(grass);

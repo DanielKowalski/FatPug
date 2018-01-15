@@ -1,10 +1,11 @@
 package me.daniel.screens;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Timer;
 
 import me.daniel.MyGame;
 import me.daniel.ui.MyLabel;
@@ -16,8 +17,9 @@ import me.daniel.ui.MyLabel;
 public class SplashScreen extends AbstractScreen {
 
     private Array<MyLabel> labels;
-    private int actualText;
-    private float delay;
+    private Image background, splash;
+    private int actualText, backgroundStage, splashStage;
+    private float textDelay, backDelay, splashDelay;
     private Group texts;
 
     public SplashScreen(MyGame game) {
@@ -28,13 +30,20 @@ public class SplashScreen extends AbstractScreen {
     protected void init() {
         labels = new Array<MyLabel>();
         texts = new Group();
+        backgroundStage = 0;
+        splashStage = 0;
 
-        Image background = new Image(MyGame.getTexture("backgrounds/splash"));
+        background = new Image(MyGame.getTexture("backgrounds/splash0"));
         background.setBounds(0, 0, MyGame.WIDTH, MyGame.HEIGHT);
         stage.addActor(background);
 
+        splash = new Image(MyGame.getTexture("splash/splash0"));
+        splash.setBounds(-MyGame.WIDTH*0.035f, 0, MyGame.WIDTH, MyGame.HEIGHT);
+        stage.addActor(splash);
+
         stage.addActor(texts);
-        delay = 2;
+
+        textDelay = 2.5f;
 
         addSplashText("Filip & Daniel przedstawiają:");
         addSplashText("FAT PUG THE GAME");
@@ -44,15 +53,28 @@ public class SplashScreen extends AbstractScreen {
 
             @Override
             public boolean act(float delta) {
-                delay+=delta;
-                if(delay >= 2) {
+                textDelay+=delta;
+                backDelay+=delta;
+                splashDelay+=delta;
+                if(textDelay >= 2.5f) {
                     if(actualText == labels.size)game.setScreen(new MenuScreen(game));
                     else {
                         texts.clear();
                         texts.addActor(labels.get(actualText));
                         actualText++;
-                        delay = 0;
+                        textDelay = 0;
                     }
+                }
+                if(splashDelay >= 0.05f) {
+                    if(splashStage < 13)splashStage++;
+                    else splashStage = 0;
+                    changeSplash();
+                    splashDelay = 0;
+                }
+                if(backDelay >= 0.70f) {
+                    backgroundStage = backgroundStage == 1 ? 0 : 1;
+                    changeBackground();
+                    backDelay = 0;
                 }
                 return false;
             }
@@ -60,9 +82,17 @@ public class SplashScreen extends AbstractScreen {
         });
     }
 
+    private void changeSplash() {
+        splash.setDrawable(new SpriteDrawable(new Sprite(MyGame.getTexture("splash/splash"+splashStage))));
+    }
+
+    private void changeBackground() {
+        background.setDrawable(new SpriteDrawable(new Sprite(MyGame.getTexture("backgrounds/splash"+backgroundStage))));
+    }
+
     private void addSplashText(String text) {
         MyLabel label = new MyLabel(text, MyGame.getFont("splash"));
-        label.setPosition((MyGame.WIDTH-label.getWidth())/2, (MyGame.HEIGHT-label.getHeight())/2);
+        label.setPosition((MyGame.WIDTH-label.getWidth())/2, label.getHeight());
         labels.add(label);
     }
 

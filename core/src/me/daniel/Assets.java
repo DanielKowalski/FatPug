@@ -17,6 +17,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 public class Assets {
 
     private AssetManager manager;
+    private boolean ttf;
 
     public Assets() {
         manager = new AssetManager();
@@ -29,22 +30,33 @@ public class Assets {
     }
 
     private void loadAssets() {
-        final String BUT = "buttons/", BACK = "backgrounds/", OBJ = "objects/";
+        final String BUT = "buttons/", BACK = "backgrounds/", OBJ = "objects/", PL = "player/";
         loadTexture(BUT+"menu");
-        loadTexture(BACK+"splash");
+        loadTexture(BACK+"splash0");
+        loadTexture(BACK+"splash1");
         loadTexture(BACK+"menu");
         loadTexture(BACK+"authors");
         loadTexture(BACK+"bluesky");
         loadTexture(OBJ+"grass");
+        loadTexture(PL+"head");
+        loadTexture(PL+"body");
+        for(int i = 0; i < 14; i++) {
+            loadTexture("splash/splash"+i);
+        }
 
         FileHandleResolver resolver = new InternalFileHandleResolver();
         manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
         manager.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
+        ttf = true;
 
-        loadFont("splash", 80, Color.BLUE, Color.WHITE);
-        loadFont("menuButton", 48, Color.WHITE, Color.BLACK);
-        loadFont("credits", 24, Color.SALMON, Color.GRAY);
-        loadFont("version", 20, Color.GRAY, Color.WHITE);
+        loadFont("splash", 80, Color.BLUE, Color.WHITE, "Amatic");
+        loadFont("menuButton", 48, Color.WHITE, Color.BLACK, "baloo");
+        loadFont("version", 20, Color.GRAY, Color.WHITE, "baloo");
+
+        manager.setLoader(BitmapFont.class, ".otf", new FreetypeFontLoader(resolver));
+        ttf = false;
+
+        loadFont("credits", 24, Color.SALMON, Color.GRAY, "AutourOne");
     }
 
     private void loadTexture(String path) {
@@ -52,14 +64,14 @@ public class Assets {
     }
 
 
-    private void loadFont(String name, int size, Color color, Color border) {
-        manager.load(name+".ttf", BitmapFont.class, new MyFont(size, color, border));
+    private void loadFont(String name, int size, Color color, Color border, String fontName) {
+        manager.load(name+".ttf", BitmapFont.class, new MyFont(fontName, size, color, border));
     }
 
     private class MyFont extends FreetypeFontLoader.FreeTypeFontLoaderParameter {
 
-        public MyFont(int size, Color color, Color border) {
-            fontFileName = "fonts/baloo.ttf";
+        public MyFont(String name, int size, Color color, Color border) {
+            fontFileName = "fonts/"+name+"."+(ttf ? "ttf" : "otf");
             fontParameters.size = size;
             fontParameters.characters += "żźćńąśłęóŻŹĆŃĄŚŁĘÓ";
             fontParameters.color = color;
