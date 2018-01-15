@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import me.daniel.MyGame;
 import me.daniel.ui.ClickCallback;
 import me.daniel.ui.MyButton;
+import me.daniel.ui.MyLabel;
 
 /**
  * Created by daniel on 11.01.2018.
@@ -21,6 +22,9 @@ public class MenuScreen extends AbstractScreen {
     protected void init() {
         initBackground();
         initButtons();
+        MyLabel version = new MyLabel("version: 1.0 indev", MyGame.getFont("version"));
+        version.setX(MyGame.WIDTH/100);
+        stage.addActor(version);
     }
 
     private void initBackground() {

@@ -42,6 +42,7 @@ public class Assets {
         loadFont("splash", 80, Color.BLUE, Color.WHITE);
         loadFont("menuButton", 48, Color.WHITE, Color.BLACK);
         loadFont("credits", 24, Color.SALMON, Color.GRAY);
+        loadFont("version", 20, Color.GRAY, Color.WHITE);
     }
 
     private void loadTexture(String path) {
@@ -61,7 +62,7 @@ public class Assets {
             fontParameters.characters += "żźćńąśłęóŻŹĆŃĄŚŁĘÓ";
             fontParameters.color = color;
             if(border != null) {
-                fontParameters.borderWidth = size/24;
+                fontParameters.borderWidth = size/20;
                 fontParameters.borderColor = border;
             }
         }
