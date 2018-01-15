@@ -11,7 +11,7 @@ import me.daniel.MyGame;
 
 public class GameplayScreen extends AbstractScreen {
 
-    private Group firstPlan, secondPlan, thirdPlan;
+    private Group playerPlan, foodPlan, backgroundPlan, uiPlan, groundPlan;
 
     public GameplayScreen(MyGame game) {
         super(game);
@@ -20,23 +20,34 @@ public class GameplayScreen extends AbstractScreen {
     @Override
     protected void init() {
         initGroups();
-        initThirdPlan();
+        initBackground();
+        inigGround();
     }
 
-    private void initThirdPlan() {
+    private void inigGround() {
+        Image grass = new Image(MyGame.getTexture("objects/grass"));
+        grass.setBounds(0, 0, MyGame.WIDTH, MyGame.HEIGHT/10);
+        groundPlan.addActor(grass);
+    }
+
+    private void initBackground() {
         Image background = new Image(MyGame.getTexture("backgrounds/bluesky"));
         background.setBounds(0, 0, MyGame.WIDTH, MyGame.HEIGHT);
-        stage.addActor(background);
+        backgroundPlan.addActor(background);
     }
 
     private void initGroups() {
-        firstPlan = new Group();
-        secondPlan = new Group();
-        thirdPlan = new Group();
+        playerPlan = new Group();
+        foodPlan = new Group();
+        backgroundPlan = new Group();
+        uiPlan = new Group();
+        groundPlan = new Group();
 
-        stage.addActor(thirdPlan);
-        stage.addActor(secondPlan);
-        stage.addActor(firstPlan);
+        stage.addActor(backgroundPlan);
+        stage.addActor(playerPlan);
+        stage.addActor(foodPlan);
+        stage.addActor(groundPlan);
+        stage.addActor(uiPlan);
     }
 
 }

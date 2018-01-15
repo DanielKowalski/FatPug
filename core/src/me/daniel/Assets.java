@@ -29,12 +29,13 @@ public class Assets {
     }
 
     private void loadAssets() {
-        final String BUT = "buttons/", BACK = "backgrounds/";
+        final String BUT = "buttons/", BACK = "backgrounds/", OBJ = "objects/";
         loadTexture(BUT+"menu");
         loadTexture(BACK+"splash");
         loadTexture(BACK+"menu");
         loadTexture(BACK+"authors");
         loadTexture(BACK+"bluesky");
+        loadTexture(OBJ+"grass");
 
         FileHandleResolver resolver = new InternalFileHandleResolver();
         manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
