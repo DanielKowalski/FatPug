@@ -42,7 +42,7 @@ public class MenuScreen extends AbstractScreen {
 
             @Override
             public void click() {
-
+                game.setScreen(new GameplayScreen(game));
             }
 
         });

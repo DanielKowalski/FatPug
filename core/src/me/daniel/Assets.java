@@ -34,6 +34,7 @@ public class Assets {
         loadTexture(BACK+"splash");
         loadTexture(BACK+"menu");
         loadTexture(BACK+"authors");
+        loadTexture(BACK+"bluesky");
 
         FileHandleResolver resolver = new InternalFileHandleResolver();
         manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
