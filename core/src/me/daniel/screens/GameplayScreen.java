@@ -1,9 +1,11 @@
 package me.daniel.screens;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 import me.daniel.MyGame;
+import me.daniel.entities.Pug;
 
 /**
  * Created by daniel on 15.01.2018.
@@ -22,6 +24,18 @@ public class GameplayScreen extends AbstractScreen {
         initGroups();
         initBackground();
         initGround();
+        initPlayer();
+    }
+
+    private void initPlayer() {
+        Pug body, head;
+        body = new Pug(true);
+        head = new Pug(false);
+        Actor grass = groundPlan.getChildren().get(0);
+        body.setPosition((MyGame.WIDTH-body.getWidth())/2, grass.getY()+grass.getHeight());
+        head.setPosition(body.getX()+(body.getWidth()-head.getWidth())/2, body.getY()+(body.getHeight()-head.getHeight())/2);
+        playerPlan.addActor(body);
+        playerPlan.addActor(head);
     }
 
     private void initGround() {

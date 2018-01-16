@@ -38,8 +38,8 @@ public class Assets {
         loadTexture(BACK+"authors");
         loadTexture(BACK+"bluesky");
         loadTexture(OBJ+"grass");
-        loadTexture(PL+"head");
-        loadTexture(PL+"body");
+        loadTexture(PL+"head0");
+        loadTexture(PL+"body0");
         for(int i = 0; i < 14; i++) {
             loadTexture("splash/splash"+i);
         }
