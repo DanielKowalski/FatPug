@@ -40,6 +40,9 @@ public class Assets {
         loadTexture(OBJ+"grass");
         loadTexture(PL+"head0");
         loadTexture(PL+"body0");
+        loadTexture(OBJ+"sun0");
+        loadTexture(OBJ+"sun1");
+        loadTexture(OBJ+"cloud");
         for(int i = 0; i < 14; i++) {
             loadTexture("splash/splash"+i);
         }
