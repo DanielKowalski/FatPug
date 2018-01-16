@@ -59,8 +59,8 @@ public class GameplayScreen extends AbstractScreen {
 
         stage.addActor(backgroundPlan);
         stage.addActor(playerPlan);
-        stage.addActor(foodPlan);
         stage.addActor(groundPlan);
+        stage.addActor(foodPlan);
         stage.addActor(uiPlan);
     }
 
