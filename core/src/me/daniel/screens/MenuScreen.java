@@ -31,8 +31,8 @@ public class MenuScreen extends AbstractScreen {
         initGroups();
         initBackground();
         initButtons();
-        MyLabel version = new MyLabel("version: 1.0 indev", MyGame.getFont("version"));
-        version.setX(MyGame.WIDTH/100);
+        MyLabel version = new MyLabel("version: "+MyGame.VERSION, MyGame.getFont("version"));
+        version.setPosition(MyGame.WIDTH/100, MyGame.HEIGHT/100);
         stage.addActor(version);
     }
 

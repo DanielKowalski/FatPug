@@ -9,7 +9,7 @@ import me.daniel.screens.SplashScreen;
 public class MyGame extends Game {
 
 	public static int WIDTH = 1280, HEIGHT = 720;
-	public static String TITLE = "FAT PUG THE GAME";
+	public static String TITLE = "FAT PUG THE GAME", VERSION = "indev[1.1]";
 	private boolean paused, onMobile;
 	private static Assets assets;
 
