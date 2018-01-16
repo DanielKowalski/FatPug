@@ -25,6 +25,7 @@ public class Pug extends Image {
 
         setSize(size, size);
         changeTexture(0);
+        setOrigin(size/2, size/2);
 
         addAction(new Action() {
 
