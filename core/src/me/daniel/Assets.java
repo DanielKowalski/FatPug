@@ -36,7 +36,7 @@ public class Assets {
         loadTexture(BACK+"splash1");
         loadTexture(BACK+"menu");
         loadTexture(BACK+"authors");
-        loadTexture(BACK+"bluesky");
+        loadTexture(BACK+"mountains");
         loadTexture(OBJ+"grass");
         loadTexture(PL+"head0");
         loadTexture(PL+"body0");

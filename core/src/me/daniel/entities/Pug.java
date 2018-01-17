@@ -20,7 +20,7 @@ public class Pug extends Image {
 
     public Pug(boolean body) {
         name = "player/"+(body ? "body": "head");
-        size = body ? MyGame.WIDTH/20 : MyGame.WIDTH/40;
+        size = body ? MyGame.WIDTH/10 : MyGame.WIDTH/(1280/50);
         speed = 10;
 
         setSize(size, size);

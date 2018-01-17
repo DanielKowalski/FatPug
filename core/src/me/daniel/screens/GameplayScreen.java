@@ -32,7 +32,7 @@ public class GameplayScreen extends AbstractScreen {
         body = new Pug(true);
         head = new Pug(false);
         Actor grass = groundPlan.getChildren().get(0);
-        body.setPosition((MyGame.WIDTH-body.getWidth())/2, grass.getY()+grass.getHeight());
+        body.setPosition((MyGame.WIDTH-body.getWidth())/2, grass.getY()+grass.getHeight()*0.78f);
         head.setPosition(body.getX()+(body.getWidth()-head.getWidth())/2, body.getY()+(body.getHeight()-head.getHeight())/2);
         playerPlan.addActor(body);
         playerPlan.addActor(head);
@@ -40,12 +40,12 @@ public class GameplayScreen extends AbstractScreen {
 
     private void initGround() {
         Image grass = new Image(MyGame.getTexture("objects/grass"));
-        grass.setBounds(0, 0, MyGame.WIDTH, MyGame.HEIGHT/10);
+        grass.setBounds(0, 0, MyGame.WIDTH, MyGame.WIDTH/10);
         groundPlan.addActor(grass);
     }
 
     private void initBackground() {
-        Image background = new Image(MyGame.getTexture("backgrounds/bluesky"));
+        Image background = new Image(MyGame.getTexture("backgrounds/mountains"));
         background.setBounds(0, 0, MyGame.WIDTH, MyGame.HEIGHT);
         backgroundPlan.addActor(background);
     }

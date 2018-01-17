@@ -66,7 +66,7 @@ public class AuthorScreen extends AbstractScreen {
         final float height = layout.height;
         for(int i = 0; i < credits.size ; i++) {
             final MyLabel label = new MyLabel(credits.get(credits.size-1-i), MyGame.getFont("credits"));
-            label.setPosition((MyGame.WIDTH-label.getWidth())/2, MyGame.HEIGHT+i*1.5f*height);
+            label.setPosition(MyGame.WIDTH/20, MyGame.HEIGHT+i*1.5f*height);
             label.addAction(new MoveByAction());
             label.addAction(new Action() {
 
