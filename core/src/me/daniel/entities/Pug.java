@@ -16,7 +16,9 @@ import me.daniel.MyGame;
 public class Pug extends Image {
 
     private String name;
-    private float size, speed;
+    private float size;
+
+    private float speed;
 
     public Pug(boolean body) {
         name = "player/"+(body ? "body": "head");
@@ -32,18 +34,18 @@ public class Pug extends Image {
             @Override
             public boolean act(float delta) {
                 if(Gdx.input.isKeyPressed(Keys.LEFT) || Gdx.input.isKeyPressed(Keys.A)){
-                    rotate(1);
-                    moveBy(-10*speed*delta,0);
+                    rotate(true);
+                    moveBy(-10*getSpeed()*delta,0);
                 }
                 if(Gdx.input.isKeyPressed(Keys.RIGHT) || Gdx.input.isKeyPressed(Keys.D)) {
-                    rotate(-1);
-                    moveBy(10*speed*delta, 0);
+                    rotate(false);
+                    moveBy(10*getSpeed()*delta, 0);
                 }
                 return false;
             }
 
-            private void rotate(int i) {
-                rotateBy(speed*i);
+            private void rotate(boolean i) {
+                rotateBy(getSpeed()*(i ? 1 : -1));
             }
 
         });
@@ -52,5 +54,18 @@ public class Pug extends Image {
     private void changeTexture(int animationStage) {
         setDrawable(new SpriteDrawable(new Sprite(MyGame.getTexture(name+animationStage))));
     }
+
+    /*
+        Getters and setters
+     */
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
+    }
+
 
 }

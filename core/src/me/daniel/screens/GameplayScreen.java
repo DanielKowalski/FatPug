@@ -1,10 +1,13 @@
 package me.daniel.screens;
 
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 import me.daniel.MyGame;
+import me.daniel.entities.Food;
 import me.daniel.entities.Pug;
 
 /**
@@ -25,6 +28,38 @@ public class GameplayScreen extends AbstractScreen {
         initBackground();
         initGround();
         initPlayer();
+        initFoods();
+    }
+
+    private void initFoods() {
+        final Group copyOfFoodPlan = foodPlan;
+        final Actor grass = groundPlan.getChildren().get(0);
+        Actor head = playerPlan.getChildren().get(1);
+        final Rectangle headRec = new Rectangle(head.getX(), head.getY(), head.getWidth(), head.getHeight());
+        foodPlan.addAction(new Action() {
+
+            @Override
+            public boolean act(float delta) {
+                checkFoodCollision();
+
+                return false;
+            }
+
+            private void checkFoodCollision() {
+                for(Actor f : copyOfFoodPlan.getChildren()) {
+                    Food food = (Food)f;
+                    if(food.getY()+food.getHeight() <= grass.getY()+grass.getHeight()) {
+                        food.remove();
+                    }
+                    Rectangle foodRec = new Rectangle(food.getX(), food.getY(), food.getWidth(), food.getHeight());
+                    if(foodRec.overlaps(headRec)) {
+                        food.remove();
+                        if(!food.isGood())game.setScreen(new MenuScreen(game));
+                    }
+                }
+            }
+
+        });
     }
 
     private void initPlayer() {
