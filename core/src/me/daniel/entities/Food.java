@@ -19,11 +19,11 @@ public class Food extends Image {
     public Food(String name, boolean good) {
         super(MyGame.getTexture("foods/"+name));
         setGood(good);
-        setSpeed(1);
+        setSpeed(10);
 
         Random r = new Random();
         float size = MyGame.WIDTH/20;
-        setBounds(r.nextInt((int)(MyGame.WIDTH-size)), MyGame.WIDTH+size, size, size);
+        setBounds(r.nextInt((int)(MyGame.WIDTH-size)), MyGame.HEIGHT, size, size);
 
         addAction(new Action() {
 

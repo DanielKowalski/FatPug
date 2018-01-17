@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
+import java.util.Random;
+
 import me.daniel.MyGame;
 import me.daniel.entities.Food;
 import me.daniel.entities.Pug;
@@ -32,27 +34,32 @@ public class GameplayScreen extends AbstractScreen {
     }
 
     private void initFoods() {
-        final Group copyOfFoodPlan = foodPlan;
         final Actor grass = groundPlan.getChildren().get(0);
-        Actor head = playerPlan.getChildren().get(1);
-        final Rectangle headRec = new Rectangle(head.getX(), head.getY(), head.getWidth(), head.getHeight());
+        final Actor head = playerPlan.getChildren().get(1);
         foodPlan.addAction(new Action() {
+
+            private float delay;
 
             @Override
             public boolean act(float delta) {
                 checkFoodCollision();
-
+                delay+=delta;
+                if(delay > 1.5f) {
+                    delay = 0;
+                    foodPlan.addActor(new Food("apple", new Random().nextBoolean()));
+                }
                 return false;
             }
 
             private void checkFoodCollision() {
-                for(Actor f : copyOfFoodPlan.getChildren()) {
+                for(Actor f : foodPlan.getChildren()) {
                     Food food = (Food)f;
                     if(food.getY()+food.getHeight() <= grass.getY()+grass.getHeight()) {
                         food.remove();
                     }
                     Rectangle foodRec = new Rectangle(food.getX(), food.getY(), food.getWidth(), food.getHeight());
-                    if(foodRec.overlaps(headRec)) {
+                    Rectangle headRec = new Rectangle(head.getX(), head.getY(), head.getWidth(), head.getHeight());
+                    if(headRec.overlaps(foodRec)) {
                         food.remove();
                         if(!food.isGood())game.setScreen(new MenuScreen(game));
                     }

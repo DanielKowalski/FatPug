@@ -43,6 +43,7 @@ public class Assets {
         loadTexture(OBJ+"sun0");
         loadTexture(OBJ+"sun1");
         loadTexture(OBJ+"cloud");
+        loadTexture("foods/apple");
         for(int i = 0; i < 14; i++) {
             loadTexture("splash/splash"+i);
         }
