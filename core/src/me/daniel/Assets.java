@@ -41,7 +41,7 @@ public class Assets {
         loadTexture(PL+"head0");
         loadTexture(PL+"head1");
         loadTexture(PL+"head2");
-        loadTexture(PL+"head4");
+        loadTexture(PL+"head3");
         loadTexture(PL+"body0");
         loadTexture(OBJ+"sun0");
         loadTexture(OBJ+"sun1");

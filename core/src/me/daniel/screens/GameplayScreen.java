@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.Timer;
 
 import java.util.Random;
 
@@ -35,7 +36,7 @@ public class GameplayScreen extends AbstractScreen {
 
     private void initFoods() {
         final Actor grass = groundPlan.getChildren().get(0);
-        final Actor head = playerPlan.getChildren().get(1);
+        final Pug head = (Pug)playerPlan.getChildren().get(1);
         foodPlan.addAction(new Action() {
 
             private float delay;
@@ -53,16 +54,11 @@ public class GameplayScreen extends AbstractScreen {
 
             private void checkFoodCollision() {
                 for(Actor f : foodPlan.getChildren()) {
-                    Food food = (Food)f;
-                    if(food.getY()+food.getHeight() <= grass.getY()+grass.getHeight()) {
-                        food.remove();
-                    }
+                    final Food food = (Food)f;
+                    if(food.getY()+food.getHeight() <= grass.getY()+grass.getHeight())food.remove();
                     Rectangle foodRec = new Rectangle(food.getX(), food.getY(), food.getWidth(), food.getHeight());
                     Rectangle headRec = new Rectangle(head.getX(), head.getY(), head.getWidth(), head.getHeight());
-                    if(headRec.overlaps(foodRec)) {
-                        food.remove();
-                        if(!food.isGood())game.setScreen(new MenuScreen(game));
-                    }
+                    if(headRec.overlaps(foodRec))head.eat(food);
                 }
             }
 

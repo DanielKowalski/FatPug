@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.utils.Timer;
 
 import me.daniel.MyGame;
 
@@ -17,16 +18,15 @@ public class Pug extends Image {
 
     private String name;
     private float size, speed;
+    private int animationStage;
 
     public Pug(boolean body) {
         name = "player/"+(body ? "body": "head");
         size = body ? MyGame.WIDTH/10 : MyGame.WIDTH/(1280/50);
         speed = 10;
-
-        System.out.println(size);
+        setAnimationStage(0);
 
         setSize(size, size);
-        changeTexture(0);
         setOrigin(size/2, size/2);
 
         addAction(new Action() {
@@ -51,7 +51,26 @@ public class Pug extends Image {
         });
     }
 
-    private void changeTexture(int animationStage) {
+    public void eat(final Food food) {
+        setAnimationStage(1);
+        food.remove();
+        new Timer().scheduleTask(new Timer.Task() {
+
+            @Override
+            public void run() {
+                setAnimationStage(food.isGood() ? 2 : 3);
+                new Timer().scheduleTask(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        setAnimationStage(0);
+                    }
+                }, 0.5f);
+            }
+
+        }, 0.5f);
+    }
+
+    public void changeTexture() {
         setDrawable(new SpriteDrawable(new Sprite(MyGame.getTexture(name+animationStage))));
     }
 
@@ -68,4 +87,12 @@ public class Pug extends Image {
     }
 
 
+    public int getAnimationStage() {
+        return animationStage;
+    }
+
+    public void setAnimationStage(int animationStage) {
+        this.animationStage = animationStage;
+        changeTexture();
+    }
 }
