@@ -23,7 +23,7 @@ public class Pug extends Image {
     public Pug(boolean body) {
         name = "player/"+(body ? "body": "head");
         size = body ? MyGame.WIDTH/10 : MyGame.WIDTH/(1280/50);
-        speed = 10;
+        speed = 15;
         setAnimationStage(0);
 
         setSize(size, size);
@@ -45,7 +45,7 @@ public class Pug extends Image {
             }
 
             private void rotate(boolean i) {
-                rotateBy(getSpeed()*(i ? 1 : -1));
+                rotateBy(getSpeed()/2*(i ? 1 : -1));
             }
 
         });
