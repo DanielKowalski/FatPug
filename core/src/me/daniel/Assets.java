@@ -39,11 +39,18 @@ public class Assets {
         loadTexture(BACK+"mountains");
         loadTexture(OBJ+"grass");
         loadTexture(PL+"head0");
+        loadTexture(PL+"head1");
+        loadTexture(PL+"head2");
+        loadTexture(PL+"head4");
         loadTexture(PL+"body0");
         loadTexture(OBJ+"sun0");
         loadTexture(OBJ+"sun1");
         loadTexture(OBJ+"cloud");
         loadTexture("foods/apple");
+        loadTexture("foods/ham");
+        loadTexture("foods/cupcake");
+        loadTexture("foods/bread");
+        loadTexture("foods/chocolate");
         for(int i = 0; i < 14; i++) {
             loadTexture("splash/splash"+i);
         }

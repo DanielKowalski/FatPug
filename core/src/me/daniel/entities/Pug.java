@@ -16,14 +16,14 @@ import me.daniel.MyGame;
 public class Pug extends Image {
 
     private String name;
-    private float size;
-
-    private float speed;
+    private float size, speed;
 
     public Pug(boolean body) {
         name = "player/"+(body ? "body": "head");
         size = body ? MyGame.WIDTH/10 : MyGame.WIDTH/(1280/50);
         speed = 10;
+
+        System.out.println(size);
 
         setSize(size, size);
         changeTexture(0);
