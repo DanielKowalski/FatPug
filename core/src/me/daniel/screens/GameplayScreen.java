@@ -27,6 +27,7 @@ public class GameplayScreen extends AbstractScreen {
 
     @Override
     protected void init() {
+        new GoodFood();
         initGroups();
         initBackground();
         initGround();
@@ -47,7 +48,7 @@ public class GameplayScreen extends AbstractScreen {
                 delay+=delta;
                 if(delay > 1.5f) {
                     delay = 0;
-                    foodPlan.addActor(new Food("apple", new Random().nextBoolean()));
+                    foodPlan.addActor(new Food(GoodFood.getRandomFood()));
                 }
                 return false;
             }

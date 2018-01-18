@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import java.util.Random;
 
 import me.daniel.MyGame;
+import me.daniel.screens.GoodFood;
 
 /**
  * Created by daniel on 17.01.2018.
@@ -16,9 +17,9 @@ public class Food extends Image {
     private float speed;
     private boolean good;
 
-    public Food(String name, boolean good) {
+    public Food(String name) {
         super(MyGame.getTexture("foods/"+name));
-        setGood(good);
+        setGood(GoodFood.isGoodFood(name));
         setSpeed(10);
 
         Random r = new Random();
