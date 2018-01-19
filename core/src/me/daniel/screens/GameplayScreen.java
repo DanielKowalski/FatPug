@@ -45,6 +45,7 @@ public class GameplayScreen extends AbstractScreen {
                 batch.begin();
 
                 MyGame.getFont("score").draw(batch, "SCORE: "+score, MyGame.WIDTH/100, MyGame.HEIGHT*0.98f);
+                MyGame.getFont("health").draw(batch, "HEALTH: "+player.getHealth(), MyGame.WIDTH/100, MyGame.HEIGHT*0.05f);
 
                 batch.end();
                 return false;

@@ -68,7 +68,8 @@ public class Assets {
         ttf = false;
 
         loadFont("credits", 24, Color.SALMON, Color.GRAY, "AutourOne");
-        loadFont("score", 36, Color.WHITE, Color.BLACK, "AutourOne");
+        loadFont("score", 32, Color.WHITE, Color.BLACK, "AutourOne");
+        loadFont("health", 32, Color.RED, Color.WHITE, "AutourOne");
     }
 
     private void loadTexture(String path) {
