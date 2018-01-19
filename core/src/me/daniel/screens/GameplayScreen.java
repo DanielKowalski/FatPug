@@ -19,7 +19,8 @@ import me.daniel.entities.Pug;
 
 public class GameplayScreen extends AbstractScreen {
 
-    private Group playerPlan, foodPlan, backgroundPlan, uiPlan, groundPlan;
+    private Group foodPlan, backgroundPlan, uiPlan, groundPlan;
+    private Pug player;
     private int score;
 
     public GameplayScreen(MyGame game) {
@@ -54,7 +55,7 @@ public class GameplayScreen extends AbstractScreen {
 
     private void initFoods() {
         final Actor grass = groundPlan.getChildren().get(0);
-        final Pug head = (Pug)playerPlan.getChildren().get(1);
+        final Actor head = player.getChildren().get(1);
         foodPlan.addAction(new Action() {
 
             private float delay;
@@ -75,9 +76,9 @@ public class GameplayScreen extends AbstractScreen {
                     final Food food = (Food)f;
                     if(food.getY()+food.getHeight() <= grass.getY()+grass.getHeight())food.remove();
                     Rectangle foodRec = new Rectangle(food.getX(), food.getY(), food.getWidth(), food.getHeight());
-                    Rectangle headRec = new Rectangle(head.getX(), head.getY(), head.getWidth(), head.getHeight());
+                    Rectangle headRec = new Rectangle(player.getX()+head.getX(), player.getY()+head.getY(), head.getWidth(), head.getHeight());
                     if(headRec.overlaps(foodRec)) {
-                        head.eat(food);
+                        player.eat(food);
                         if(food.isGood())score+=10;
                     }
                 }
@@ -87,21 +88,12 @@ public class GameplayScreen extends AbstractScreen {
     }
 
     private void initPlayer() {
-        Pug body;
-        final Pug head;
-        body = new Pug(true);
-        head = new Pug(false);
-        Actor grass = groundPlan.getChildren().get(0);
-        body.setPosition((MyGame.WIDTH-body.getWidth())/2, grass.getY()+grass.getHeight()*0.78f);
-        head.setPosition(body.getX()+(body.getWidth()-head.getWidth())/2, body.getY()+(body.getHeight()-head.getHeight())/2);
-        playerPlan.addActor(body);
-        playerPlan.addActor(head);
-
-        playerPlan.addAction(new Action() {
+        player.setPosition((MyGame.WIDTH-player.getWidth())/2, 0.78f*groundPlan.getChildren().get(0).getHeight());
+        player.addAction(new Action() {
 
             @Override
             public boolean act(float delta) {
-                if(head.getHealth() <= 0)game.setScreen(new MenuScreen(game));
+                if(player.getHealth() <= 0)game.setScreen(new MenuScreen(game));
                 return false;
             }
 
@@ -121,14 +113,14 @@ public class GameplayScreen extends AbstractScreen {
     }
 
     private void initGroups() {
-        playerPlan = new Group();
+        player = new Pug();
         foodPlan = new Group();
         backgroundPlan = new Group();
         uiPlan = new Group();
         groundPlan = new Group();
 
         stage.addActor(backgroundPlan);
-        stage.addActor(playerPlan);
+        stage.addActor(player);
         stage.addActor(groundPlan);
         stage.addActor(foodPlan);
         stage.addActor(uiPlan);
