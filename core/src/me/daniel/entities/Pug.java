@@ -18,12 +18,13 @@ public class Pug extends Image {
 
     private String name;
     private float size, speed;
-    private int animationStage;
+    private int animationStage, health;
 
     public Pug(boolean body) {
         name = "player/"+(body ? "body": "head");
         size = body ? MyGame.WIDTH/10 : MyGame.WIDTH/(1280/50);
         speed = 15;
+        health = 3;
         setAnimationStage(0);
 
         setSize(size, size);
@@ -63,6 +64,7 @@ public class Pug extends Image {
                     @Override
                     public void run() {
                         setAnimationStage(0);
+                        if(!food.isGood())setHealth(getHealth()-1);
                     }
                 }, 0.5f);
             }
@@ -71,7 +73,7 @@ public class Pug extends Image {
     }
 
     public void changeTexture() {
-        setDrawable(new SpriteDrawable(new Sprite(MyGame.getTexture(name+animationStage))));
+        setDrawable(new SpriteDrawable(new Sprite(MyGame.getTexture(name+getAnimationStage()))));
     }
 
     /*
@@ -94,5 +96,13 @@ public class Pug extends Image {
     public void setAnimationStage(int animationStage) {
         this.animationStage = animationStage;
         changeTexture();
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 }

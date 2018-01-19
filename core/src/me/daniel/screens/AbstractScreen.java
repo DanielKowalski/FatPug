@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
@@ -18,12 +19,14 @@ public abstract class AbstractScreen implements Screen {
 
     protected MyGame game;
     protected Stage stage;
+    protected SpriteBatch batch;
     private OrthographicCamera camera;
 
     public AbstractScreen(MyGame game) {
         createCamera();
         this.game = game;
-        stage = new Stage(new StretchViewport(MyGame.WIDTH, MyGame.HEIGHT));
+        batch = new SpriteBatch();
+        stage = new Stage(new StretchViewport(MyGame.WIDTH, MyGame.HEIGHT), batch);
         Gdx.input.setInputProcessor(stage);
         init();
     }
@@ -40,12 +43,13 @@ public abstract class AbstractScreen implements Screen {
     public void render(float delta) {
         clearScreen();
         camera.update();
+        batch.setProjectionMatrix(camera.combined);
 
+        stage.draw();
         if(!game.isPaused()) {
             stage.act();
             if(Gdx.input.isKeyJustPressed(Keys.ESCAPE))Gdx.app.exit();
         }
-        stage.draw();
     }
 
     private void clearScreen() {

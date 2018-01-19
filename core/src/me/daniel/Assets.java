@@ -61,13 +61,14 @@ public class Assets {
         ttf = true;
 
         loadFont("splash", 80, Color.BLUE, Color.WHITE, "Amatic");
-        loadFont("menuButton", 48, Color.WHITE, Color.BLACK, "baloo");
+        loadFont("menuButton", 40, Color.WHITE, Color.BLACK, "baloo");
         loadFont("version", 20, Color.GRAY, Color.WHITE, "baloo");
 
         manager.setLoader(BitmapFont.class, ".otf", new FreetypeFontLoader(resolver));
         ttf = false;
 
         loadFont("credits", 24, Color.SALMON, Color.GRAY, "AutourOne");
+        loadFont("score", 36, Color.WHITE, Color.BLACK, "AutourOne");
     }
 
     private void loadTexture(String path) {

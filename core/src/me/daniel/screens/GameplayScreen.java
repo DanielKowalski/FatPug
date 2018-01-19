@@ -20,6 +20,7 @@ import me.daniel.entities.Pug;
 public class GameplayScreen extends AbstractScreen {
 
     private Group playerPlan, foodPlan, backgroundPlan, uiPlan, groundPlan;
+    private int score;
 
     public GameplayScreen(MyGame game) {
         super(game);
@@ -27,12 +28,28 @@ public class GameplayScreen extends AbstractScreen {
 
     @Override
     protected void init() {
+        score = 0;
         new GoodFood();
         initGroups();
         initBackground();
         initGround();
         initPlayer();
         initFoods();
+
+        stage.addAction(new Action() {
+
+            @Override
+            public boolean act(float delta) {
+
+                batch.begin();
+
+                MyGame.getFont("score").draw(batch, "SCORE: "+score, MyGame.WIDTH/100, MyGame.HEIGHT*0.98f);
+
+                batch.end();
+                return false;
+            }
+
+        });
     }
 
     private void initFoods() {
@@ -59,7 +76,10 @@ public class GameplayScreen extends AbstractScreen {
                     if(food.getY()+food.getHeight() <= grass.getY()+grass.getHeight())food.remove();
                     Rectangle foodRec = new Rectangle(food.getX(), food.getY(), food.getWidth(), food.getHeight());
                     Rectangle headRec = new Rectangle(head.getX(), head.getY(), head.getWidth(), head.getHeight());
-                    if(headRec.overlaps(foodRec))head.eat(food);
+                    if(headRec.overlaps(foodRec)) {
+                        head.eat(food);
+                        if(food.isGood())score+=10;
+                    }
                 }
             }
 
@@ -67,7 +87,8 @@ public class GameplayScreen extends AbstractScreen {
     }
 
     private void initPlayer() {
-        Pug body, head;
+        Pug body;
+        final Pug head;
         body = new Pug(true);
         head = new Pug(false);
         Actor grass = groundPlan.getChildren().get(0);
@@ -75,6 +96,16 @@ public class GameplayScreen extends AbstractScreen {
         head.setPosition(body.getX()+(body.getWidth()-head.getWidth())/2, body.getY()+(body.getHeight()-head.getHeight())/2);
         playerPlan.addActor(body);
         playerPlan.addActor(head);
+
+        playerPlan.addAction(new Action() {
+
+            @Override
+            public boolean act(float delta) {
+                if(head.getHealth() <= 0)game.setScreen(new MenuScreen(game));
+                return false;
+            }
+
+        });
     }
 
     private void initGround() {
