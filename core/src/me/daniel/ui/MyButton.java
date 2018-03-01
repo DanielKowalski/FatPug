@@ -26,6 +26,7 @@ public class MyButton extends Group {
 
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
+                MyGame.getMusic("click").play();
                 click.click();
                 return true;
             }

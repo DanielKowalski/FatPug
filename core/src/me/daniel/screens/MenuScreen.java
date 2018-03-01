@@ -31,6 +31,8 @@ public class MenuScreen extends AbstractScreen {
         initGroups();
         initBackground();
         initButtons();
+        MyGame.getMusic("backgrounds/menu").play();
+        MyGame.getMusic("backgrounds/menu").setLooping(true);
         MyLabel version = new MyLabel("version: "+MyGame.VERSION, MyGame.getFont("version"));
         version.setPosition(MyGame.WIDTH/100, MyGame.HEIGHT/100);
         stage.addActor(version);
@@ -111,18 +113,20 @@ public class MenuScreen extends AbstractScreen {
             @Override
             public void click() {
                 game.setScreen(new GameplayScreen(game));
+                MyGame.getMusic("backgrounds/menu").stop();
             }
 
         });
-        addButton("AUTHORS", new ClickCallback() {
+        addButton("AUTORZY", new ClickCallback() {
 
             @Override
             public void click() {
                 game.setScreen(new AuthorScreen(game));
+                MyGame.getMusic("backgrounds/menu").stop();
             }
 
         });
-        if(!game.isOnMobile())addButton("EXIT", new ClickCallback() {
+        if(!game.isOnMobile())addButton("WYJŚCIE", new ClickCallback() {
 
             @Override
             public void click() {

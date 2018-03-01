@@ -3,7 +3,6 @@ package me.daniel.screens;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
@@ -25,18 +24,21 @@ public class AuthorScreen extends AbstractScreen {
 
     @Override
     protected void init() {
+        MyGame.getMusic("backgrounds/credits").play();
         Image img = new Image(MyGame.getTexture("backgrounds/authors"));
         img.setBounds(0, 0, MyGame.WIDTH, MyGame.HEIGHT);
         stage.addActor(img);
 
         credits = new Array<String>();
-        credits.add("PROGRAMMING:");
+        credits.add("PROGRAMOWANIE:");
         credits.add("DANIEL KOWALSKI");
-        credits.add("MUSIC AND SOUNDS:");
+        credits.add("MUZYKA:");
+        credits.add("BENSOUND.COM");
+        credits.add("DŻWIĘKI:");
+        credits.add("ZAPSPLAT.COM");
+        credits.add("GRAFIKA:");
         credits.add("FILIP STRÓŻYK");
-        credits.add("GRAPHICS:");
-        credits.add("FILIP STRÓŻYK");
-        credits.add("FONTS:");
+        credits.add("CZCIONKI:");
         credits.add("BALOO");
         credits.add("Copyright (c) 2015 Ek Type (www.ektype.in)");
         credits.add("AUTOUR ONE");
@@ -55,6 +57,7 @@ public class AuthorScreen extends AbstractScreen {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 game.setScreen(new MenuScreen(game));
+                MyGame.getMusic("backgrounds/credits").stop();
                 return true;
             }
 
@@ -67,13 +70,15 @@ public class AuthorScreen extends AbstractScreen {
         for(int i = 0; i < credits.size ; i++) {
             final MyLabel label = new MyLabel(credits.get(credits.size-1-i), MyGame.getFont("credits"));
             label.setPosition(MyGame.WIDTH/20, MyGame.HEIGHT+i*1.5f*height);
-            label.addAction(new MoveByAction());
             label.addAction(new Action() {
 
                 @Override
                 public boolean act(float delta) {
-                    label.moveBy(0, -2);
-                    if(label.getY() < -1.5f*credits.size*height)game.setScreen(new MenuScreen(game));
+                    label.moveBy(0, -50*delta);
+                    if(label.getY() < -1.5f*credits.size*height) {
+                        MyGame.getMusic("backgrounds/credits").stop();
+                        game.setScreen(new MenuScreen(game));
+                    }
                     return false;
                 }
 

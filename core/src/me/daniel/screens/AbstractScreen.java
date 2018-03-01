@@ -2,6 +2,7 @@ package me.daniel.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -20,10 +21,13 @@ public abstract class AbstractScreen implements Screen {
     protected MyGame game;
     protected Stage stage;
     protected SpriteBatch batch;
+    protected Preferences prefs;
+    protected final String SCORE_KEY = "highscore";
     private OrthographicCamera camera;
 
     public AbstractScreen(MyGame game) {
         createCamera();
+        prefs = Gdx.app.getPreferences("FatPugTheGame");
         this.game = game;
         batch = new SpriteBatch();
         stage = new Stage(new StretchViewport(MyGame.WIDTH, MyGame.HEIGHT), batch);

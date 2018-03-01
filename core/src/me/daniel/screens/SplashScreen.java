@@ -18,8 +18,8 @@ public class SplashScreen extends AbstractScreen {
 
     private Array<MyLabel> labels;
     private Image background, splash;
-    private int actualText, backgroundStage, splashStage;
-    private float textDelay, backDelay, splashDelay;
+    private int actualText, backgroundStage;
+    private float textDelay, backDelay;
     private Group texts;
 
     public SplashScreen(MyGame game) {
@@ -31,7 +31,9 @@ public class SplashScreen extends AbstractScreen {
         labels = new Array<MyLabel>();
         texts = new Group();
         backgroundStage = 0;
-        splashStage = 0;
+
+        MyGame.getMusic("backgrounds/splash").play();
+        MyGame.getMusic("backgrounds/splash").setLooping(true);
 
         background = new Image(MyGame.getTexture("backgrounds/splash0"));
         background.setBounds(0, 0, MyGame.WIDTH, MyGame.HEIGHT);
@@ -53,23 +55,28 @@ public class SplashScreen extends AbstractScreen {
 
             @Override
             public boolean act(float delta) {
+                game.update();
+                return false;
+            }
+
+        });
+
+        stage.addAction(new Action() {
+
+            @Override
+            public boolean act(float delta) {
                 textDelay+=delta;
                 backDelay+=delta;
-                splashDelay+=delta;
                 if(textDelay >= 2.5f) {
-                    if(actualText == labels.size)game.setScreen(new MenuScreen(game));
+                    if(actualText == labels.size) {
+                        if(game.finishedLoading())game.setScreen(new InstructionScreen(game));
+                    }
                     else {
                         texts.clear();
                         texts.addActor(labels.get(actualText));
                         actualText++;
                         textDelay = 0;
                     }
-                }
-                if(splashDelay >= 0.05f) {
-                    if(splashStage < 13)splashStage++;
-                    else splashStage = 0;
-                    changeSplash();
-                    splashDelay = 0;
                 }
                 if(backDelay >= 0.70f) {
                     backgroundStage = backgroundStage == 1 ? 0 : 1;
@@ -80,10 +87,6 @@ public class SplashScreen extends AbstractScreen {
             }
 
         });
-    }
-
-    private void changeSplash() {
-        splash.setDrawable(new SpriteDrawable(new Sprite(MyGame.getTexture("splash/splash"+splashStage))));
     }
 
     private void changeBackground() {
